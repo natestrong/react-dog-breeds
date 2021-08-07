@@ -1,26 +1,38 @@
-import React from "react";
-import logo from "./logo.svg";
+import React, { useEffect, useState } from "react";
 import "./App.css";
+import { getAllBreeds } from "./utils/getBreeds";
+import Results from "./Results";
+import { IBreeds } from "./models/IRequests";
 
-function App() {
+const Search = () => {
+  // const [breed, setBreed] = useState("");
+  // const breeds = [];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="search-container">
+      <input className="search-input" placeholder="Search for pups" />
     </div>
   );
-}
+};
+
+const App = () => {
+  const [breeds, setBreeds] = useState({});
+
+  useEffect(() => {
+    void requestBreeds();
+  }, []);
+
+  async function requestBreeds() {
+    const allBreeds: IBreeds = await getAllBreeds();
+    setBreeds(allBreeds);
+  }
+
+  return (
+    <div className="center-column">
+      <Search />
+      <Results breeds={breeds} />
+    </div>
+  );
+};
 
 export default App;
