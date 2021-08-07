@@ -1,10 +1,10 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
     background-color: #bfbab0;
     background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e3e0db' fill-opacity='0.26'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
@@ -22,11 +22,26 @@ body {
     align-items: center;
     max-width: 1300px;
     margin: auto;
+    padding: 0 50px 50px 50px;
+}
+
+@media (max-width: 800px) {
+    .center-column {
+        padding: 0 25px 25px 25px;
+    }
+
+    .breed-card .header {
+        font-size: 20px;
+    }
+
+    .breed-card .subBreed-header {
+        font-size: 16px;
+    }
 }
 
 .search-container {
     margin: 40px;
-    min-width:330px;
+    min-width: 330px;
 }
 
 .search-container input {
@@ -35,27 +50,30 @@ body {
 }
 
 .breed-results {
-    display: flex;
+    display: grid;
+    gap: 1.2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1.2fr));
+
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
 .breed-card {
-    flex: 0 1 calc(22% - 1em);
-    min-height:140px;
-    min-width: 200px;
     padding: 15px;
-    margin: 10px;
+    height: 160px;
 
     border-radius: 10px;
     background: #BFBAB0;
-    box-shadow:  7px -7px 14px #aaa69d,
+    box-shadow: 7px -7px 14px #aaa69d,
     -7px 7px 14px #d4cec3;
+
+    position: relative;
 }
 
 .breed-card .header {
     margin: 0;
     font-size: 26px;
+    position: relative;
 }
 
 .breed-card .subBreed-header {
@@ -64,8 +82,36 @@ body {
     margin: 6px 0 8px 0;
     font-weight: normal;
     font-style: italic;
+    position: relative;
 }
-.breed-card .subBreed-wrapper {
-    /*height: 40px;*/
-    /*overflow-y: auto;*/
+
+.breed-card .shadow {
+    text-shadow: 1px 4px 4px #bfbab0, 3px -3px 4px #bfbab0;
+}
+
+.subBreed-wrapper {
+    position: relative;
+}
+
+.image-container {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 220px;
+    height: 160px;
+}
+
+.image-fader {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to left, rgba(255,255,255,0) 0%,#BFBAB0 100%);
+}
+
+.breed-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
 }

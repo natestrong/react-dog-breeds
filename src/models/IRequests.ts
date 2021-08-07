@@ -10,3 +10,8 @@ export interface IBreed {
   subBreeds: string[];
   image?: string;
 }
+
+export interface IBreedImageRequest {
+  status: boolean;
+  message: string;
+}
