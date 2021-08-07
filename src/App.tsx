@@ -3,17 +3,9 @@ import "./App.css";
 import { getAllBreeds } from "./utils/getBreeds";
 import Results from "./Results";
 import { IBreeds } from "./models/IRequests";
+import Search from "./Search";
 
-const Search = () => {
-  // const [breed, setBreed] = useState("");
-  // const breeds = [];
-
-  return (
-    <div className="search-container">
-      <input className="search-input" placeholder="Search for pups" />
-    </div>
-  );
-};
+let allBreeds: IBreeds = {};
 
 const App = () => {
   const [breeds, setBreeds] = useState({});
@@ -23,13 +15,27 @@ const App = () => {
   }, []);
 
   async function requestBreeds() {
-    const allBreeds: IBreeds = await getAllBreeds();
+    allBreeds = await getAllBreeds();
     setBreeds(allBreeds);
+  }
+
+  function filterBreedsBySearch(searchTerm: string) {
+    if (searchTerm.length === 0) {
+      setBreeds(allBreeds);
+    } else {
+      const filtered = Object.entries(allBreeds)
+        .filter((breed) => JSON.stringify(breed).includes(searchTerm))
+        .reduce((obj, [key]) => {
+          obj[key] = allBreeds[key];
+          return obj;
+        }, {});
+      setBreeds(filtered);
+    }
   }
 
   return (
     <div className="center-column">
-      <Search />
+      <Search filterBreedsBySearch={filterBreedsBySearch} />
       <Results breeds={breeds} />
     </div>
   );
